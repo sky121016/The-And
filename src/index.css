@@ -8,6 +8,8 @@
 body {
   margin: 0 auto;
   background-color: var(--dark);
+  margin-bottom: 56px;
+
 }
 
 li {

@@ -24,7 +24,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="Container">
+    <H.Container>
       <Header TitleColor="peach" Text="나의 여행"></Header>
 
       <H.TripList>
@@ -32,7 +32,7 @@ const Home = () => {
           return <TripCard trip={trip}></TripCard>;
         })}
       </H.TripList>
-    </div>
+    </H.Container>
   );
 };
 

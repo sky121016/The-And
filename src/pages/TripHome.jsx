@@ -9,8 +9,10 @@ import {
   FcBriefcase,
   FcSurvey,
 } from "react-icons/fc";
+import { useNavigate } from "react-router-dom";
 
 const TripHome = () => {
+  const navigate = useNavigate();
   const tripList = {
     title: "프랑스 여행",
     startDate: "2024-06-24",
@@ -22,7 +24,7 @@ const TripHome = () => {
 
   return (
     <>
-      <Header TitleColor="peach" Text={tripList.title}></Header>
+      <Header TitleColor="peach" Text={tripList.title} />
 
       <T.Container>
         <T.TripInfo>
@@ -57,7 +59,8 @@ const TripHome = () => {
               <FcCalendar size={40} />
             </T.MenuIcon>
           </T.Menu>
-          <T.Menu>
+
+          <T.Menu onClick={() => navigate("/rules")}>
             <T.MenuTitle>규칙</T.MenuTitle>
             <T.MenuIcon>
               <FcRules size={40} />
