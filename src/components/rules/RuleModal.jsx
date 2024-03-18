@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import * as R from "./RuleEditModal.style";
+import * as R from "./RuleModal.style";
 import { useSelector } from "react-redux";
 
-const RuleEditModal = ({ setEditModal }) => {
+const RuleModal = ({
+  createModal,
+  setCreateModal,
+  editModal,
+  setEditModal,
+}) => {
   const rule = useSelector((state) => state.rule);
   const [title, setTitle] = useState(rule.title);
   const [description, setDescription] = useState(rule.description);
@@ -11,12 +16,29 @@ const RuleEditModal = ({ setEditModal }) => {
   console.log(description);
 
   const closeModal = () => {
-    setEditModal(false);
+    if (editModal) {
+      setEditModal(false);
+    } else {
+      setCreateModal(false);
+    }
   };
+
+  const save = () => {
+    closeModal();
+
+    if (editModal) {
+      console.log("edit");
+    } else {
+      console.log("create");
+    }
+  };
+
   return (
     <R.Background>
       <R.Container>
-        <R.Header>규칙 수정하기</R.Header>
+        {createModal && <R.Header>규칙 만들기</R.Header>}
+        {editModal && <R.Header>규칙 수정하기</R.Header>}
+
         <R.Title>
           <h3>규칙</h3>
           <input
@@ -41,13 +63,13 @@ const RuleEditModal = ({ setEditModal }) => {
 
         <R.Buttons>
           <R.Cancel onClick={closeModal}>취소</R.Cancel>
-          <R.Save onClick={closeModal}>확인</R.Save>
+          <R.Save onClick={save}>확인</R.Save>
         </R.Buttons>
 
-        <R.Delete onClick={closeModal}>규칙 삭제하기</R.Delete>
+        {editModal && <R.Delete onClick={closeModal}>규칙 삭제하기</R.Delete>}
       </R.Container>
     </R.Background>
   );
 };
 
-export default RuleEditModal;
+export default RuleModal;
