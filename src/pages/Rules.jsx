@@ -1,32 +1,80 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as R from "./Rules.style";
 import Header from "../components/common/Header";
 import Rule from "../components/rules/Rule";
 import RuleEditModal from "../components/rules/RuleEditModal";
+import { db } from "../firebase";
+import { collection, getDocs, addDoc } from "firebase/firestore";
 
 const Rules = () => {
-  const rules = [
-    {
-      id: 1,
-      title: "7시에 일어나기",
-      description: "알람이 울리면 바로 일어나기",
-    },
-    {
-      id: 2,
-      title: "지각하지 않기",
-      description: "지각비 1분당 100원",
-    },
-  ];
+  // const rules = [
+  //   {
+  //     id: 1,
+  //     title: "7시에 일어나기",
+  //     description: "알람이 울리면 바로 일어나기",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "지각하지 않기",
+  //     description: "지각비 1분당 100원",
+  //   },
+  // ];
+
+  const [rules, setRules] = useState();
+
+  const addRule = async () => {
+    try {
+      const rulesCollection = collection(db, "rules");
+      const newRuleDoc = await addDoc(rulesCollection, {
+        id: 1,
+        title: "new rule",
+        description: "새로운 규칙",
+      });
+      console.log("added ", newRuleDoc.id);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchRules = async () => {
+    try {
+      const rulesCollection = collection(db, "rules");
+      console.log(rulesCollection);
+      const ruleSnapshot = await getDocs(rulesCollection);
+      console.log("ruleSnapshot", ruleSnapshot);
+      console.log("ruleSnapshot.docs", ruleSnapshot.docs);
+
+      const rulesData = ruleSnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      console.log("rulesData", rulesData);
+      setRules(rulesData);
+      console.log(rules);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const getRules = query(collection(db, "rules"));
+  // console.log(getRules);
 
   const [editModal, setEditModal] = useState(false);
 
+  useEffect(() => {
+    addRule();
+    fetchRules();
+  }, []);
   return (
     <>
       <Header Text="규칙" />
       <R.Container>
-        {rules.map((rule) => {
-          return <Rule rule={rule} key={rule.id} setEditModal={setEditModal} />;
-        })}
+        {rules &&
+          rules.map((rule) => {
+            return (
+              <Rule rule={rule} key={rule.id} setEditModal={setEditModal} />
+            );
+          })}
       </R.Container>
 
       {editModal && <RuleEditModal setEditModal={setEditModal} />}
