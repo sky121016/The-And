@@ -14,9 +14,15 @@ const ruleSlice = createSlice({
       state.title = title;
       state.description = description;
     },
+
+    resetRule(state) {
+      state.id = null;
+      state.title = "";
+      state.description = "";
+    },
   },
 });
 
-export const { setRule } = ruleSlice.actions;
+export const { setRule, resetRule } = ruleSlice.actions;
 
 export default ruleSlice.reducer;

@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import * as R from "./Rules.style";
 import Header from "../components/common/Header";
 import Rule from "../components/rules/Rule";
-import RuleEditModal from "../components/rules/RuleEditModal";
+import RuleEditModal from "../components/rules/RuleModal";
 import { db } from "../firebase";
 import { collection, getDocs, addDoc } from "firebase/firestore";
+import CreateButton from "../components/common/CreateButton";
+import { useDispatch } from "react-redux";
+import { resetRule } from "../redux/rule";
 
 const Rules = () => {
   // const rules = [
@@ -19,6 +22,8 @@ const Rules = () => {
   //     description: "지각비 1분당 100원",
   //   },
   // ];
+
+  const dispatch = useDispatch();
 
   const [rules, setRules] = useState();
 
@@ -60,6 +65,13 @@ const Rules = () => {
   // console.log(getRules);
 
   const [editModal, setEditModal] = useState(false);
+  const [createModal, setCreateModal] = useState(false);
+
+  // 규칙 만들기 함수
+  const createRule = () => {
+    dispatch(resetRule());
+    setCreateModal(true);
+  };
 
   useEffect(() => {
     addRule();
@@ -77,7 +89,25 @@ const Rules = () => {
           })}
       </R.Container>
 
-      {editModal && <RuleEditModal setEditModal={setEditModal} />}
+      <CreateButton text="규칙 만들기" action={createRule} />
+
+      {createModal && (
+        <RuleEditModal
+          createModal={createModal}
+          setCreateModal={setCreateModal}
+          editModal={editModal}
+          setEditModal={setEditModal}
+        />
+      )}
+
+      {editModal && (
+        <RuleEditModal
+          createModal={createModal}
+          setCreateModal={setCreateModal}
+          editModal={editModal}
+          setEditModal={setEditModal}
+        />
+      )}
     </>
   );
 };
