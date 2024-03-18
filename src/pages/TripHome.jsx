@@ -67,7 +67,7 @@ const TripHome = () => {
             </T.MenuIcon>
           </T.Menu>
 
-          <T.Menu>
+          <T.Menu onClick={() => navigate("/budget")}>
             <T.MenuTitle>예산</T.MenuTitle>
             <T.MenuIcon>
               <FcMoneyTransfer size={40} />
