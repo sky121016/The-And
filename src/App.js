@@ -7,6 +7,7 @@ import Nav from "./components/common/Nav";
 import TripHome from "./pages/TripHome";
 import Rules from "./pages/Rules";
 import Budget from "./pages/Budget";
+import BudgetDetail from "./pages/BudgetDetail";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/trip" element={<TripHome />} />
           <Route path="/rules" element={<Rules />} />
           <Route path="/budget" element={<Budget />} />
+          <Route path="/budget/detail" element={<BudgetDetail />} />
         </Routes>
         <Nav></Nav>
       </BrowserRouter>

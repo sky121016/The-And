@@ -1,10 +1,12 @@
 import React from "react";
 import * as E from "./ExpenseItem.style";
+import { useNavigate } from "react-router-dom";
 
 const ExpenseItem = ({ expense }) => {
   // console.log(expense);
+  const navigate = useNavigate();
   return (
-    <E.Container>
+    <E.Container onClick={()=>navigate("/budget/detail")}>
       <E.Top>
         <E.Payer>{expense.payer}</E.Payer>
         <E.Category>{expense.category}</E.Category>

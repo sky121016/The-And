@@ -7,21 +7,21 @@ import CreateButton from "../components/common/CreateButton";
 const Budget = () => {
   const expenses = [
     {
-      date: "2024/03/04",
+      date: "03/04",
       payer: "홍수민",
       category: "카페",
       title: "스타벅스",
       price: 10000,
     },
     {
-      date: "2024/03/04",
+      date: "03/04",
       payer: "홍수민",
       category: "식당",
       title: "떡볶이",
       price: 12000,
     },
     {
-      date: "2024/03/02",
+      date: "03/02",
       payer: "홍수민",
       category: "카페",
       title: "이디야",
