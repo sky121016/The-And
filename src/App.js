@@ -12,8 +12,8 @@ import BudgetDetail from "./pages/BudgetDetail";
 function App() {
   return (
     <div className="App">
-      <TopNav></TopNav>
       <BrowserRouter>
+        <TopNav></TopNav>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/trip" element={<TripHome />} />
