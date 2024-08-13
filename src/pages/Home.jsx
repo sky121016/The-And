@@ -6,7 +6,7 @@ import * as H from "./Home.style";
 const Home = () => {
   const tripList = [
     {
-      title: "프랑스 여행",
+      title: "프랑스",
       startDate: "2024-06-24",
       endDate: "2024-07-12",
       passengers: ["홍수민", "홍가경"],
@@ -14,7 +14,7 @@ const Home = () => {
       destination: "프랑스",
     },
     {
-      title: "프랑스 여행",
+      title: "프랑스",
       startDate: "2024-06-24",
       endDate: "2024-07-12",
       passengers: ["홍수민", "홍가경"],
@@ -25,7 +25,7 @@ const Home = () => {
 
   return (
     <H.Container>
-      <Header TitleColor="peach" Text="나의 여행"></Header>
+      <Header TitleColor="peach" Text="Trip"></Header>
 
       <H.TripList>
         {tripList.map((trip, index) => {

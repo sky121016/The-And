@@ -12,5 +12,5 @@ export const Title = styled.h1`
     props.TitleColor === "peach" ? "var(--peach)" : "var(--white)"};
 
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
 `;
